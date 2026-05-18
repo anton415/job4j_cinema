@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Кинотека')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <div class="page-title">
+        <h1 class="h2">Кинотека</h1>
+    </div>
+    <div class="alert alert-light border" th:if="${#lists.isEmpty(films)}">Фильмы пока не добавлены.</div>
+    <div class="row g-4" th:if="${!#lists.isEmpty(films)}">
+        <div class="col-sm-6 col-lg-4" th:each="film : ${films}">
+            <article class="content-card bg-white h-100 overflow-hidden">
+                <img class="poster w-100" th:src="@{/files/{id}(id=${film.fileId})}" th:alt="${film.name}">
+                <div class="p-4">
+                    <h2 class="h5" th:text="${film.name}">Название</h2>
+                    <div class="meta-list mb-3">
+                        <span th:text="${film.year}">1999</span>
+                        <span> · </span>
+                        <span th:text="${film.genre}">Жанр</span>
+                        <span> · </span>
+                        <span th:text="${film.minimalAge + '+'}">16+</span>
+                    </div>
+                    <p class="text-secondary" th:text="${film.description}">Описание</p>
+                    <div class="fw-semibold" th:text="${film.durationInMinutes + ' мин'}">120 мин</div>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

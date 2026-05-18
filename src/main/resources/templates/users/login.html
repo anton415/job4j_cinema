@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Вход')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <form class="content-card bg-white p-4 mx-auto form-panel" th:action="@{/login}" method="post">
+        <h1 class="h3 mb-4">Вход</h1>
+        <div class="alert alert-danger" th:if="${message != null}" th:text="${message}">Ошибка</div>
+        <div class="mb-3">
+            <label class="form-label" for="email">Почта</label>
+            <input class="form-control" id="email" name="email" type="email" data-focus required>
+        </div>
+        <div class="mb-4">
+            <label class="form-label" for="password">Пароль</label>
+            <input class="form-control" id="password" name="password" type="password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Войти</button>
+    </form>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Билет куплен')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <section class="content-card bg-white p-4 mx-auto form-panel">
+        <h1 class="h3 mb-3">Билет куплен</h1>
+        <dl class="row mb-4">
+            <dt class="col-sm-4">Фильм</dt>
+            <dd class="col-sm-8" th:text="${ticket.filmName}">Фильм</dd>
+            <dt class="col-sm-4">Зал</dt>
+            <dd class="col-sm-8" th:text="${ticket.hallName}">Зал</dd>
+            <dt class="col-sm-4">Начало</dt>
+            <dd class="col-sm-8" th:text="${#temporals.format(ticket.startTime, 'dd.MM.yyyy HH:mm')}">Время</dd>
+            <dt class="col-sm-4">Ряд</dt>
+            <dd class="col-sm-8" th:text="${ticket.rowNumber}">1</dd>
+            <dt class="col-sm-4">Место</dt>
+            <dd class="col-sm-8" th:text="${ticket.placeNumber}">1</dd>
+            <dt class="col-sm-4">Цена</dt>
+            <dd class="col-sm-8" th:text="${ticket.price + ' ₽'}">350 ₽</dd>
+            <dt class="col-sm-4">Покупатель</dt>
+            <dd class="col-sm-8" th:text="${ticket.userFullName}">Покупатель</dd>
+        </dl>
+        <a class="btn btn-primary" th:href="@{/sessions}">К расписанию</a>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

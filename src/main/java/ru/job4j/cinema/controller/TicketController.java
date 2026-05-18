@@ -39,7 +39,7 @@ public class TicketController {
         if (session.isEmpty()) {
             return addNotFound(model, "Сеанс с указанным идентификатором не найден");
         }
-        model.addAttribute("session", session.get());
+        model.addAttribute("filmSession", session.get());
         model.addAttribute("film", filmService.findById(session.get().getFilmId()).orElse(null));
         model.addAttribute("rows", filmSessionService.findRowsBySessionId(sessionId));
         model.addAttribute("places", filmSessionService.findPlacesBySessionId(sessionId));

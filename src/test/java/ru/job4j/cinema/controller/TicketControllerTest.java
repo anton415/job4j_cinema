@@ -44,7 +44,7 @@ class TicketControllerTest {
         context.mockMvc.perform(get("/tickets/buy/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("tickets/buy"))
-                .andExpect(model().attributeExists("session", "film", "rows", "places", "ticket"));
+                .andExpect(model().attributeExists("filmSession", "film", "rows", "places", "ticket"));
     }
 
     /**

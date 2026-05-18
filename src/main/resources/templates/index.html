@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Кинотеатр')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <section class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <h1 class="display-5 fw-bold mb-3">Кинотеатр</h1>
+            <p class="lead text-secondary mb-4">
+                Расписание сеансов, кинотека и покупка билетов в одном приложении.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-primary btn-lg" th:href="@{/sessions}">Смотреть расписание</a>
+                <a class="btn btn-outline-secondary btn-lg" th:href="@{/films}">Открыть кинотеку</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="content-card bg-white p-4">
+                <h2 class="h4 mb-3">Сегодня в кино</h2>
+                <div class="d-grid gap-3">
+                    <div class="border rounded p-3">
+                        <div class="fw-semibold">Матрица</div>
+                        <div class="text-secondary">Большой зал, дневной сеанс</div>
+                    </div>
+                    <div class="border rounded p-3">
+                        <div class="fw-semibold">Интерстеллар</div>
+                        <div class="text-secondary">Широкий экран и объемный звук</div>
+                    </div>
+                    <div class="border rounded p-3">
+                        <div class="fw-semibold">Начало</div>
+                        <div class="text-secondary">Вечерний сеанс в синем зале</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Расписание')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <div class="page-title">
+        <h1 class="h2">Расписание</h1>
+    </div>
+    <div class="alert alert-light border" th:if="${#lists.isEmpty(sessions)}">Сеансы пока не добавлены.</div>
+    <div class="d-grid gap-3" th:if="${!#lists.isEmpty(sessions)}">
+        <article class="content-card bg-white p-3 p-md-4" th:each="filmSession : ${sessions}">
+            <div class="d-flex flex-column flex-md-row gap-3">
+                <img class="poster-sm rounded" th:src="@{/files/{id}(id=${filmSession.fileId})}"
+                     th:alt="${filmSession.filmName}">
+                <div class="flex-grow-1">
+                    <h2 class="h5 mb-2" th:text="${filmSession.filmName}">Фильм</h2>
+                    <div class="meta-list d-flex flex-wrap gap-3">
+                        <span th:text="${filmSession.genre}">Жанр</span>
+                        <span th:text="${filmSession.hallName}">Зал</span>
+                        <span th:text="${#temporals.format(filmSession.startTime, 'dd.MM.yyyy HH:mm')}">20.05</span>
+                        <span th:text="${#temporals.format(filmSession.endTime, 'HH:mm')}">12:16</span>
+                        <span th:text="${filmSession.price + ' ₽'}">350 ₽</span>
+                    </div>
+                </div>
+                <div class="align-self-md-center">
+                    <a class="btn btn-primary" th:href="@{/tickets/buy/{id}(id=${filmSession.id})}">Купить билет</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

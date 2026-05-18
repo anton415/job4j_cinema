@@ -1,0 +1,44 @@
+body {
+    background: #f5f7fb;
+    color: #20242a;
+}
+
+.app-main {
+    min-height: calc(100vh - 144px);
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.page-title {
+    margin-bottom: 1.5rem;
+}
+
+.poster {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    background: #e9ecef;
+}
+
+.poster-sm {
+    width: 88px;
+    height: 118px;
+    object-fit: cover;
+    background: #e9ecef;
+}
+
+.content-card {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(33, 37, 41, 0.08);
+}
+
+.meta-list {
+    color: #5c6773;
+    font-size: 0.95rem;
+}
+
+.form-panel {
+    max-width: 560px;
+}

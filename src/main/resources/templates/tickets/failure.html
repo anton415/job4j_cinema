@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Покупка не выполнена')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <section class="content-card bg-white p-4 mx-auto form-panel">
+        <h1 class="h3 mb-3">Место уже занято</h1>
+        <p class="text-secondary mb-4">Выберите другой ряд или место для этого сеанса.</p>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" th:href="@{/tickets/buy/{id}(id=${sessionId})}">Выбрать другое место</a>
+            <a class="btn btn-outline-secondary" th:href="@{/sessions}">К расписанию</a>
+        </div>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

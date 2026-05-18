@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Покупка билета')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <article class="content-card bg-white p-4">
+                <div class="d-flex gap-3">
+                    <img class="poster-sm rounded" th:src="@{/files/{id}(id=${filmSession.fileId})}"
+                         th:alt="${filmSession.filmName}">
+                    <div>
+                        <h1 class="h3" th:text="${filmSession.filmName}">Фильм</h1>
+                        <div class="meta-list d-flex flex-wrap gap-3 mb-3">
+                            <span th:text="${filmSession.genre}">Жанр</span>
+                            <span th:text="${filmSession.hallName}">Зал</span>
+                            <span th:text="${#temporals.format(filmSession.startTime, 'dd.MM.yyyy HH:mm')}">Старт</span>
+                            <span th:text="${#temporals.format(filmSession.endTime, 'HH:mm')}">Финиш</span>
+                            <span th:text="${filmSession.price + ' ₽'}">Цена</span>
+                        </div>
+                        <div th:if="${film != null}">
+                            <p class="text-secondary" th:text="${film.description}">Описание</p>
+                            <div class="meta-list d-flex flex-wrap gap-3">
+                                <span th:text="${film.year}">Год</span>
+                                <span th:text="${film.minimalAge + '+'}">Возраст</span>
+                                <span th:text="${film.durationInMinutes + ' мин'}">Длительность</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="col-lg-5">
+            <form class="content-card bg-white p-4" th:action="@{/tickets}" method="post">
+                <input type="hidden" name="sessionId" th:value="${filmSession.id}">
+                <div class="mb-3">
+                    <label class="form-label" for="rowNumber">Ряд</label>
+                    <select class="form-select" id="rowNumber" name="rowNumber" data-focus required>
+                        <option th:each="row : ${rows}" th:value="${row}" th:text="${row}">1</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="placeNumber">Место</label>
+                    <select class="form-select" id="placeNumber" name="placeNumber" required>
+                        <option th:each="place : ${places}" th:value="${place}" th:text="${place}">1</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary" type="submit">Купить</button>
+                    <a class="btn btn-outline-secondary" th:href="@{/sessions}">Отменить</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

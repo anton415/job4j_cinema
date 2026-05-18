@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Некорректный запрос')}"></head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="app-main container py-5">
+    <section class="content-card bg-white p-4 mx-auto form-panel">
+        <h1 class="h3 mb-3">Некорректный запрос</h1>
+        <p class="text-secondary">Проверьте введенные данные и повторите действие.</p>
+        <a class="btn btn-primary" th:href="@{/}">На главную</a>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
