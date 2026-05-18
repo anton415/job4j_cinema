@@ -16,8 +16,8 @@
 
 ### Задачи
 
-- [ ] Создать `pom.xml` с parent `spring-boot-starter-parent` версии `3.4.0`.
-- [ ] Добавить зависимости:
+- [x] Создать `pom.xml` с parent `spring-boot-starter-parent` версии `3.4.0`.
+- [x] Добавить зависимости:
   - `spring-boot-starter-web`;
   - `spring-boot-starter-thymeleaf`;
   - `spring-boot-devtools`;
@@ -27,16 +27,16 @@
   - `jcip-annotations`;
   - `spring-boot-starter-test`;
   - `mockito-core`, если не хватает транзитивных зависимостей Spring Boot Test.
-- [ ] Настроить Maven-профили `production` и `test`.
-- [ ] Подключить плагины:
+- [x] Настроить Maven-профили `production` и `test`.
+- [x] Подключить плагины:
   - `spring-boot-maven-plugin`;
   - `liquibase-maven-plugin`;
   - `maven-checkstyle-plugin`;
   - `jacoco-maven-plugin`.
-- [ ] Добавить `checkstyle.xml`.
-- [ ] Добавить `.gitignore`.
-- [ ] Создать корневой класс `ru.job4j.cinema.Main`.
-- [ ] Создать пакеты:
+- [x] Добавить `checkstyle.xml`.
+- [x] Добавить `.gitignore`.
+- [x] Создать корневой класс `ru.job4j.cinema.Main`.
+- [x] Создать пакеты:
   - `configuration`;
   - `controller`;
   - `dto`;
@@ -44,7 +44,7 @@
   - `model`;
   - `repository`;
   - `service`.
-- [ ] Создать директории `db/scripts`, `files`, `img`, `templates`, `static/css`, `static/js`.
+- [x] Создать директории `db/scripts`, `files`, `img`, `templates`, `static/css`, `static/js`.
 
 ### Проверка
 
@@ -407,4 +407,3 @@ mvn jacoco:report
 6. `Реализован Web-слой cinema`
 7. `Добавлены страницы cinema`
 8. `Оформлен README проекта cinema`
-
