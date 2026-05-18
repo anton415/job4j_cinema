@@ -159,7 +159,7 @@ mvn checkstyle:check
 
 ### Задачи
 
-- [ ] Создать интерфейсы репозиториев:
+- [x] Создать интерфейсы репозиториев:
   - `FileRepository`;
   - `GenreRepository`;
   - `FilmRepository`;
@@ -167,7 +167,7 @@ mvn checkstyle:check
   - `FilmSessionRepository`;
   - `UserRepository`;
   - `TicketRepository`.
-- [ ] Создать реализации:
+- [x] Создать реализации:
   - `Sql2oFileRepository`;
   - `Sql2oGenreRepository`;
   - `Sql2oFilmRepository`;
@@ -175,12 +175,12 @@ mvn checkstyle:check
   - `Sql2oFilmSessionRepository`;
   - `Sql2oUserRepository`;
   - `Sql2oTicketRepository`.
-- [ ] В `Sql2oUserRepository.save` обрабатывать уникальность `email` через `Optional.empty()`.
-- [ ] В `Sql2oTicketRepository.save` обрабатывать уникальность `(session_id, row_number, place_number)` через
+- [x] В `Sql2oUserRepository.save` обрабатывать уникальность `email` через `Optional.empty()`.
+- [x] В `Sql2oTicketRepository.save` обрабатывать уникальность `(session_id, row_number, place_number)` через
   `Optional.empty()`.
-- [ ] Для PostgreSQL проверять `SQLState 23505`.
-- [ ] Создать `Sql2oTestHelper` для очистки таблиц в правильном порядке перед тестами.
-- [ ] Написать интеграционные тесты на PostgreSQL:
+- [x] Для PostgreSQL проверять `SQLState 23505`.
+- [x] Создать `Sql2oTestHelper` для очистки таблиц в правильном порядке перед тестами.
+- [x] Написать интеграционные тесты на PostgreSQL:
   - `Sql2oUserRepositoryTest`;
   - `Sql2oTicketRepositoryTest`;
   - `Sql2oFilmRepositoryTest`;
