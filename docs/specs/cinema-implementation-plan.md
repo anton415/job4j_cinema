@@ -118,7 +118,7 @@ mvn -Ptest liquibase:dropAll liquibase:update
 
 ### Задачи
 
-- [ ] Создать модели:
+- [x] Создать модели:
   - `File`;
   - `Genre`;
   - `Film`;
@@ -126,13 +126,13 @@ mvn -Ptest liquibase:dropAll liquibase:update
   - `FilmSession`;
   - `User`;
   - `Ticket`.
-- [ ] Для моделей добавить конструкторы, getters/setters, `equals` и `hashCode`.
-- [ ] Создать DTO:
+- [x] Для моделей добавить конструкторы, getters/setters, `equals` и `hashCode`.
+- [x] Создать DTO:
   - `FileDto`;
   - `FilmDto`;
   - `FilmSessionDto`;
   - `TicketDto`.
-- [ ] Убедиться, что Java-поля соответствуют SQL alias в будущих запросах:
+- [x] Убедиться, что Java-поля соответствуют SQL alias в будущих запросах:
   - `genre_id AS genreId`;
   - `file_id AS fileId`;
   - `halls_id AS hallId`;
