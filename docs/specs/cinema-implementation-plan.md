@@ -63,29 +63,29 @@ mvn checkstyle:check
 
 ### Задачи
 
-- [ ] Создать production БД:
+- [x] Создать production БД:
 
 ```sql
 CREATE DATABASE cinema;
 ```
 
-- [ ] Создать тестовую БД:
+- [x] Создать тестовую БД:
 
 ```sql
 CREATE DATABASE cinema_test;
 ```
 
-- [ ] Добавить `src/main/resources/application.properties`.
-- [ ] Добавить `src/main/resources/application-production.properties` для БД `cinema`.
-- [ ] Добавить `src/main/resources/application-test.properties` для БД `cinema_test`.
-- [ ] Добавить `db/liquibase.properties` для БД `cinema`.
-- [ ] Добавить `db/liquibase_test.properties` для БД `cinema_test`.
-- [ ] Создать `DatasourceConfiguration`:
+- [x] Добавить `src/main/resources/application.properties`.
+- [x] Добавить `src/main/resources/application-production.properties` для БД `cinema`.
+- [x] Добавить `src/main/resources/application-test.properties` для БД `cinema_test`.
+- [x] Добавить `db/liquibase.properties` для БД `cinema`.
+- [x] Добавить `db/liquibase_test.properties` для БД `cinema_test`.
+- [x] Создать `DatasourceConfiguration`:
   - `BasicDataSource`;
   - `Sql2o`;
   - converter для `LocalDateTime`.
-- [ ] Создать `db/dbchangelog.xml`.
-- [ ] Добавить DDL/DML скрипты из спецификации:
+- [x] Создать `db/dbchangelog.xml`.
+- [x] Добавить DDL/DML скрипты из спецификации:
   - `files`;
   - `genres`;
   - `films`;
@@ -93,7 +93,7 @@ CREATE DATABASE cinema_test;
   - `film_sessions`;
   - `users`;
   - `tickets`.
-- [ ] Положить постеры в `files` и указать относительные пути в `002_dml_insert_files.sql`.
+- [x] Положить постеры в `files` и указать относительные пути в `002_dml_insert_files.sql`.
 
 ### Проверка
 

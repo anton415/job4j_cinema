@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001-create-files-table" author="job4j">
+        <sqlFile path="scripts/001_ddl_create_files_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="002-insert-files" author="job4j">
+        <sqlFile path="scripts/002_dml_insert_files.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="003-create-genres-table" author="job4j">
+        <sqlFile path="scripts/003_ddl_create_genres_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="004-insert-genres" author="job4j">
+        <sqlFile path="scripts/004_dml_insert_genres.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="005-create-films-table" author="job4j">
+        <sqlFile path="scripts/005_ddl_create_films_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="006-insert-films" author="job4j">
+        <sqlFile path="scripts/006_dml_insert_films.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="007-create-halls-table" author="job4j">
+        <sqlFile path="scripts/007_ddl_create_halls_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="008-insert-halls" author="job4j">
+        <sqlFile path="scripts/008_dml_insert_halls.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="009-create-film-sessions-table" author="job4j">
+        <sqlFile path="scripts/009_ddl_create_film_sessions_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="010-insert-film-sessions" author="job4j">
+        <sqlFile path="scripts/010_dml_insert_film_sessions.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="011-create-users-table" author="job4j">
+        <sqlFile path="scripts/011_ddl_create_users_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="012-create-tickets-table" author="job4j">
+        <sqlFile path="scripts/012_ddl_create_tickets_table.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>

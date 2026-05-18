@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="720" viewBox="0 0 480 720" role="img" aria-labelledby="title desc">
+  <title id="title">Inception poster</title>
+  <desc id="desc">Original vector poster with folding city blocks, a corridor, and a spinning top.</desc>
+  <defs>
+    <linearGradient id="inceptionSky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#0c1520"/>
+      <stop offset="0.48" stop-color="#202832"/>
+      <stop offset="1" stop-color="#08090b"/>
+    </linearGradient>
+    <linearGradient id="cityFace" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d9dde1"/>
+      <stop offset="1" stop-color="#5c6570"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#2f353b"/>
+      <stop offset="1" stop-color="#090a0c"/>
+    </linearGradient>
+    <filter id="topShadow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+  <rect width="480" height="720" fill="url(#inceptionSky)"/>
+  <path d="M0 250h480v166H0z" fill="#111820"/>
+  <g opacity="0.95">
+    <path d="M28 226h70v188H28zM112 185h62v229h-62zM188 212h78v202h-78zM284 178h60v236h-60zM358 220h82v194h-82z" fill="url(#cityFace)"/>
+    <path d="M28 226l40-46h70l-40 46zM112 185l32-38h62l-32 38zM188 212l40-44h78l-40 44zM284 178l34-42h60l-34 42zM358 220l42-45h82l-42 45z" fill="#f4f5f6" opacity="0.72"/>
+    <g stroke="#1c252d" stroke-width="3" opacity="0.55">
+      <path d="M50 250v128M76 250v128M132 214v158M154 214v158M210 244v134M238 244v134M306 208v164M328 208v164M382 250v128M414 250v128"/>
+      <path d="M42 278h44M42 316h44M124 247h38M124 289h38M203 282h50M203 324h50M298 250h38M298 296h38M374 286h54M374 326h54"/>
+    </g>
+  </g>
+  <path d="M0 416h480v304H0z" fill="url(#floor)"/>
+  <path d="M100 720l72-304h136l72 304z" fill="#171b21"/>
+  <path d="M172 416h136M151 502h178M129 596h222" stroke="#4e5965" stroke-width="4" opacity="0.72"/>
+  <path d="M239 345c-42 0-76 22-76 50 0 24 24 43 58 49l-28 36c-7 9 4 21 14 15l33-20 34 20c10 6 21-6 14-15l-29-36c34-6 58-25 58-49 0-28-35-50-78-50z" fill="#101114" opacity="0.9" filter="url(#topShadow)"/>
+  <path d="M240 336c-42 0-76 22-76 50s34 50 76 50 76-22 76-50-34-50-76-50z" fill="#d6dadc"/>
+  <ellipse cx="240" cy="386" rx="55" ry="32" fill="#7d858d"/>
+  <path d="M209 385c12-20 50-20 62 0-13 16-49 16-62 0z" fill="#e9ecef"/>
+  <path d="M240 336v-54" stroke="#e9ecef" stroke-width="8" stroke-linecap="round"/>
+  <path d="M216 442l-25 39 49-29 50 29-26-39" fill="#bec5ca"/>
+  <path d="M86 120c94 58 214 58 308 0" stroke="#cfd6dc" stroke-width="9" fill="none" opacity="0.55"/>
+  <path d="M86 120c95-28 215-28 308 0" stroke="#69747f" stroke-width="6" fill="none" opacity="0.65"/>
+  <text x="240" y="615" text-anchor="middle" fill="#f5f6f7" font-family="Arial Black, Arial, sans-serif" font-size="54" font-weight="900">INCEPTION</text>
+  <text x="240" y="648" text-anchor="middle" fill="#b9bec5" font-family="Arial, sans-serif" font-size="17" letter-spacing="4">2010</text>
+</svg>
