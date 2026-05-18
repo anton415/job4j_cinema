@@ -25,6 +25,14 @@ public class Sql2oUserRepository implements UserRepository {
             FROM users
             WHERE email = :email AND password = :password
             """;
+    private static final String FIND_BY_ID = """
+            SELECT id,
+                   full_name AS fullName,
+                   email,
+                   password
+            FROM users
+            WHERE id = :id
+            """;
 
     private final Sql2o sql2o;
 
@@ -47,6 +55,16 @@ public class Sql2oUserRepository implements UserRepository {
                 return Optional.empty();
             }
             throw exception;
+        }
+    }
+
+    @Override
+    public Optional<User> findById(int id) {
+        try (var connection = sql2o.open()) {
+            var user = connection.createQuery(FIND_BY_ID)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(User.class);
+            return Optional.ofNullable(user);
         }
     }
 

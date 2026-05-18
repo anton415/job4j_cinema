@@ -203,24 +203,24 @@ mvn -Ptest test -Dtest=*RepositoryTest
 
 ### Задачи
 
-- [ ] Создать интерфейсы:
+- [x] Создать интерфейсы:
   - `FileService`;
   - `FilmService`;
   - `FilmSessionService`;
   - `UserService`;
   - `TicketService`.
-- [ ] Создать реализации:
+- [x] Создать реализации:
   - `SimpleFileService`;
   - `SimpleFilmService`;
   - `SimpleFilmSessionService`;
   - `SimpleUserService`;
   - `SimpleTicketService`.
-- [ ] В `SimpleFilmService` собрать `FilmDto` из `films`, `genres`, `files`.
-- [ ] В `SimpleFilmSessionService` собрать расписание с фильмом, жанром, залом, временем и ценой.
-- [ ] В `SimpleFilmSessionService` формировать списки рядов и мест по данным `Hall`, без хардкода.
-- [ ] В `SimpleTicketService` проверить существование сеанса, зала и пользователя перед покупкой.
-- [ ] В `SimpleTicketService` вернуть `Optional.empty()`, если место занято.
-- [ ] Написать unit-тесты с Mockito:
+- [x] В `SimpleFilmService` собрать `FilmDto` из `films`, `genres`, `files`.
+- [x] В `SimpleFilmSessionService` собрать расписание с фильмом, жанром, залом, временем и ценой.
+- [x] В `SimpleFilmSessionService` формировать списки рядов и мест по данным `Hall`, без хардкода.
+- [x] В `SimpleTicketService` проверить существование сеанса, зала и пользователя перед покупкой.
+- [x] В `SimpleTicketService` вернуть `Optional.empty()`, если место занято.
+- [x] Написать unit-тесты с Mockito:
   - `SimpleFileServiceTest`;
   - `SimpleFilmServiceTest`;
   - `SimpleFilmSessionServiceTest`;
