@@ -243,10 +243,10 @@ mvn test -Dtest=*ServiceTest
 
 ### Задачи
 
-- [ ] Создать `SessionUser` по аналогии с `job4j_dreamjob`.
-- [ ] Создать `SessionFilter`.
-- [ ] Создать `AuthorizationFilter`.
-- [ ] Публичными оставить:
+- [x] Создать `SessionUser` по аналогии с `job4j_dreamjob`.
+- [x] Создать `SessionFilter`.
+- [x] Создать `AuthorizationFilter`.
+- [x] Публичными оставить:
   - `/`;
   - `/index`;
   - `/films`;
@@ -258,18 +258,18 @@ mvn test -Dtest=*ServiceTest
   - `/files/`;
   - `/error`;
   - статические ресурсы.
-- [ ] Защитить:
+- [x] Защитить:
   - `POST /tickets`;
   - `/tickets/success/`;
   - `/logout`.
-- [ ] Создать контроллеры:
+- [x] Создать контроллеры:
   - `IndexController`;
   - `FilmController`;
   - `FilmSessionController`;
   - `TicketController`;
   - `UserController`;
   - `FileController`.
-- [ ] Реализовать сценарии:
+- [x] Реализовать сценарии:
   - просмотр главной страницы;
   - просмотр кинотеки;
   - просмотр расписания;
@@ -280,7 +280,7 @@ mvn test -Dtest=*ServiceTest
   - регистрация;
   - вход;
   - выход.
-- [ ] Написать MVC/filter тесты:
+- [x] Написать MVC/filter тесты:
   - `IndexControllerTest`;
   - `FilmControllerTest`;
   - `FilmSessionControllerTest`;
