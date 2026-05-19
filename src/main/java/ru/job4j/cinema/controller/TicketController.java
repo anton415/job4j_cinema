@@ -1,7 +1,5 @@
 package ru.job4j.cinema.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import net.jcip.annotations.ThreadSafe;
 
 import org.springframework.stereotype.Controller;
@@ -11,9 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ru.job4j.cinema.filter.SessionUser;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.film.FilmService;
 import ru.job4j.cinema.service.filmsession.FilmSessionService;
 import ru.job4j.cinema.service.ticket.TicketService;
@@ -48,11 +48,8 @@ public class TicketController {
     }
 
     @PostMapping
-    public String buy(@ModelAttribute Ticket ticket, HttpServletRequest request) {
-        var user = SessionUser.get(request);
-        if (user.getId() == 0) {
-            return "redirect:/login";
-        }
+    public String buy(@ModelAttribute Ticket ticket,
+                      @SessionAttribute(SessionUser.ATTRIBUTE) User user) {
         ticket.setUserId(user.getId());
         return ticketService.buy(ticket)
                 .map(saved -> "redirect:/tickets/success/" + saved.getId())

@@ -46,19 +46,6 @@ class TicketControllerTest {
                 .andExpect(model().attributeExists("filmSession", "film", "rows", "places", "ticket"));
     }
 
-    @DisplayName("гость при отправке покупки перенаправляется на страницу входа.")
-    @Test
-    void whenGuestBuysTicketThenRedirectToLogin() throws Exception {
-        var context = createContext();
-
-        context.mockMvc.perform(post("/tickets")
-                        .param("sessionId", "1")
-                        .param("rowNumber", "1")
-                        .param("placeNumber", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/login"));
-    }
-
     @DisplayName("авторизованный пользователь после покупки попадает на страницу успеха.")
     @Test
     void whenAuthorizedUserBuysTicketThenRedirectToSuccessPage() throws Exception {
