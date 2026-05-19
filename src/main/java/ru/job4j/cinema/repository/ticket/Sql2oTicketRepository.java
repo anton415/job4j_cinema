@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import net.jcip.annotations.ThreadSafe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,8 @@ import ru.job4j.cinema.repository.common.Sql2oExceptionHelper;
 @ThreadSafe
 @Repository
 public class Sql2oTicketRepository implements TicketRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(Sql2oTicketRepository.class);
+
     private static final String SAVE = """
             INSERT INTO tickets (session_id, row_number, place_number, user_id)
             VALUES (:sessionId, :rowNumber, :placeNumber, :userId)
@@ -53,8 +57,15 @@ public class Sql2oTicketRepository implements TicketRepository {
             return Optional.of(ticket);
         } catch (Sql2oException exception) {
             if (Sql2oExceptionHelper.isUniqueViolation(exception)) {
+                LOG.warn("Failed to save ticket because place is already occupied: "
+                                + "sessionId={}, rowNumber={}, placeNumber={}, userId={}",
+                        ticket.getSessionId(), ticket.getRowNumber(),
+                        ticket.getPlaceNumber(), ticket.getUserId());
                 return Optional.empty();
             }
+            LOG.error("Failed to save ticket: sessionId={}, rowNumber={}, placeNumber={}, userId={}",
+                    ticket.getSessionId(), ticket.getRowNumber(),
+                    ticket.getPlaceNumber(), ticket.getUserId(), exception);
             throw exception;
         }
     }

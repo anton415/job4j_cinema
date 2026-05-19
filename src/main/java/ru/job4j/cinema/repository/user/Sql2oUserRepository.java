@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import net.jcip.annotations.ThreadSafe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,8 @@ import ru.job4j.cinema.repository.common.Sql2oExceptionHelper;
 @ThreadSafe
 @Repository
 public class Sql2oUserRepository implements UserRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(Sql2oUserRepository.class);
+
     private static final String SAVE = """
             INSERT INTO users (full_name, email, password)
             VALUES (:fullName, :email, :password)
@@ -53,8 +57,11 @@ public class Sql2oUserRepository implements UserRepository {
             return Optional.of(user);
         } catch (Sql2oException exception) {
             if (Sql2oExceptionHelper.isUniqueViolation(exception)) {
+                LOG.warn("Failed to save user because email is already in use: email={}",
+                        user.getEmail());
                 return Optional.empty();
             }
+            LOG.error("Failed to save user: email={}", user.getEmail(), exception);
             throw exception;
         }
     }

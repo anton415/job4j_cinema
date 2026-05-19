@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import net.jcip.annotations.ThreadSafe;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ru.job4j.cinema.dto.FileDto;
@@ -16,6 +18,8 @@ import ru.job4j.cinema.repository.file.FileRepository;
 @ThreadSafe
 @Service
 public class SimpleFileService implements FileService {
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleFileService.class);
+
     private final FileRepository fileRepository;
 
     public SimpleFileService(FileRepository fileRepository) {
@@ -31,6 +35,8 @@ public class SimpleFileService implements FileService {
         try {
             return Optional.of(new FileDto(file.getName(), Files.readAllBytes(Path.of(file.getPath()))));
         } catch (IOException exception) {
+            LOG.error("Failed to read file: id={}, name={}, path={}",
+                    file.getId(), file.getName(), file.getPath(), exception);
             return Optional.empty();
         }
     }
