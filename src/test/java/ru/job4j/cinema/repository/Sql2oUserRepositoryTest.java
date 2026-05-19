@@ -1,10 +1,14 @@
 package ru.job4j.cinema.repository;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ru.job4j.cinema.model.User;
 
@@ -12,6 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ActiveProfiles("test")
+@Tag("testcontainers")
+@Testcontainers
+@Import(PostgresContainerConfiguration.class)
 class Sql2oUserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
@@ -24,9 +31,7 @@ class Sql2oUserRepositoryTest {
         sql2oTestHelper.clearMutableTables();
     }
 
-    /**
-     * Сценарий: пользователь сохраняется и затем находится по email и password.
-     */
+    @DisplayName("пользователь сохраняется и затем находится по email и password.")
     @Test
     void whenSaveUserThenCanFindByEmailAndPassword() {
         var user = new User("Иван Иванов", "ivan@example.com", "password");
@@ -40,9 +45,7 @@ class Sql2oUserRepositoryTest {
         assertThat(found.get()).isEqualTo(saved.get());
     }
 
-    /**
-     * Сценарий: повторная регистрация с тем же email возвращает Optional.empty().
-     */
+    @DisplayName("повторная регистрация с тем же email возвращает Optional.empty().")
     @Test
     void whenSaveUserWithDuplicateEmailThenReturnEmptyOptional() {
         var first = new User("Иван Иванов", "ivan@example.com", "password");

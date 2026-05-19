@@ -3,6 +3,7 @@ package ru.job4j.cinema.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.job4j.cinema.model.Film;
@@ -16,9 +17,7 @@ import static org.mockito.Mockito.when;
 
 class SimpleFilmServiceTest {
 
-    /**
-     * Сценарий: сервис собирает FilmDto с названием жанра из отдельного репозитория.
-     */
+    @DisplayName("сервис собирает FilmDto с названием жанра из отдельного репозитория.")
     @Test
     void whenFindAllThenReturnFilmDtosWithGenreName() {
         var filmRepository = mock(FilmRepository.class);
@@ -38,9 +37,7 @@ class SimpleFilmServiceTest {
         assertThat(films.get(0).getFileId()).isEqualTo(1);
     }
 
-    /**
-     * Сценарий: если фильм не найден, сервис возвращает Optional.empty().
-     */
+    @DisplayName("если фильм не найден, сервис возвращает Optional.empty().")
     @Test
     void whenFindAbsentFilmByIdThenReturnEmptyOptional() {
         var filmRepository = mock(FilmRepository.class);

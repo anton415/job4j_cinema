@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.nio.charset.StandardCharsets;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class SessionFilterTest {
 
-    /**
-     * Сценарий: для гостя фильтр добавляет гостевого пользователя в request attribute.
-     */
+    @DisplayName("для гостя фильтр добавляет гостевого пользователя в request attribute.")
     @Test
     void whenGuestRequestsPageThenRequestContainsGuestUser() throws Exception {
         var mockMvc = MockMvcBuilders.standaloneSetup(new TestController())
@@ -34,9 +33,7 @@ class SessionFilterTest {
                 .andExpect(content().string("Гость"));
     }
 
-    /**
-     * Сценарий: для авторизованного пользователя фильтр добавляет session user в request.
-     */
+    @DisplayName("для авторизованного пользователя фильтр добавляет session user в request.")
     @Test
     void whenAuthorizedUserRequestsPageThenRequestContainsSessionUser() throws Exception {
         var session = new MockHttpSession();

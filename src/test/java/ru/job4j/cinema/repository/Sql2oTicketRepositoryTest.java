@@ -1,10 +1,14 @@
 package ru.job4j.cinema.repository;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
@@ -13,6 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ActiveProfiles("test")
+@Tag("testcontainers")
+@Testcontainers
+@Import(PostgresContainerConfiguration.class)
 class Sql2oTicketRepositoryTest {
     @Autowired
     private TicketRepository ticketRepository;
@@ -28,9 +35,7 @@ class Sql2oTicketRepositoryTest {
         sql2oTestHelper.clearMutableTables();
     }
 
-    /**
-     * Сценарий: билет сохраняется, находится по id и входит в список билетов сеанса.
-     */
+    @DisplayName("билет сохраняется, находится по id и входит в список билетов сеанса.")
     @Test
     void whenSaveTicketThenCanFindByIdAndSessionId() {
         var user = userRepository.save(new User("Иван Иванов", "ivan@example.com", "password")).get();
@@ -46,9 +51,7 @@ class Sql2oTicketRepositoryTest {
         assertThat(sessionTickets).containsExactly(saved.get());
     }
 
-    /**
-     * Сценарий: повторная покупка того же места на том же сеансе возвращает Optional.empty().
-     */
+    @DisplayName("повторная покупка того же места на том же сеансе возвращает Optional.empty().")
     @Test
     void whenSaveTicketWithSameSessionRowAndPlaceThenReturnEmptyOptional() {
         var user = userRepository.save(new User("Иван Иванов", "ivan@example.com", "password")).get();

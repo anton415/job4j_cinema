@@ -69,6 +69,12 @@ mvn checkstyle:check
 mvn jacoco:report
 ```
 
+Тесты репозиториев с PostgreSQL Testcontainer запускаются отдельно и требуют доступный Docker:
+
+```bash
+mvn -Ptestcontainers test
+```
+
 ## Сценарии
 
 - Главная страница: `http://localhost:8080/`

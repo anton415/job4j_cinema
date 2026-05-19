@@ -100,15 +100,15 @@ file.directory=files
 - `application-production.properties`:
 
 ```properties
-datasource.url=jdbc:postgresql://127.0.0.1:5432/cinema
-datasource.username=postgres
-datasource.password=password
-datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://127.0.0.1:5432/cinema
+spring.datasource.username=postgres
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
-- `application-test.properties` должен указывать настройки отдельной тестовой PostgreSQL БД, например `cinema_test`.
-- `db/liquibase_test.properties` должен использовать ту же тестовую PostgreSQL БД, чтобы интеграционные тесты проверяли
-  SQL на реальном диалекте PostgreSQL.
+- Обычный `mvn test` должен оставаться Docker-free.
+- Интеграционные тесты репозиториев должны использовать PostgreSQL Testcontainer, подключенный через Spring Boot
+  `@ServiceConnection`, и запускаться отдельным профилем `mvn -Ptestcontainers test`.
 
 ## Миграции и данные
 

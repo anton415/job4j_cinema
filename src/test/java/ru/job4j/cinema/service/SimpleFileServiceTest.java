@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -18,9 +19,7 @@ class SimpleFileServiceTest {
     @TempDir
     private Path tempDir;
 
-    /**
-     * Сценарий: сервис читает существующий файл по пути из репозитория.
-     */
+    @DisplayName("сервис читает существующий файл по пути из репозитория.")
     @Test
     void whenGetExistingFileThenReturnFileDto() throws Exception {
         var path = tempDir.resolve("poster.svg");
@@ -37,9 +36,7 @@ class SimpleFileServiceTest {
         assertThat(result.get().getContent()).containsExactly(content);
     }
 
-    /**
-     * Сценарий: если файл отсутствует в хранилище, сервис возвращает Optional.empty().
-     */
+    @DisplayName("если файл отсутствует в хранилище, сервис возвращает Optional.empty().")
     @Test
     void whenFileContentDoesNotExistThenReturnEmptyOptional() {
         var fileRepository = mock(FileRepository.class);

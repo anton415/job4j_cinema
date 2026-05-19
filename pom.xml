@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <activeProfile>production</activeProfile>
         <liquibase.propertyFile>db/liquibase.properties</liquibase.propertyFile>
+        <test.excluded.groups>testcontainers</test.excluded.groups>
     </properties>
 
     <dependencies>
@@ -61,6 +62,26 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -116,9 +137,16 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedGroups>${test.excluded.groups}</excludedGroups>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.14</version>
                 <executions>
                     <execution>
                         <goals>
@@ -153,6 +181,12 @@
             <properties>
                 <activeProfile>test</activeProfile>
                 <liquibase.propertyFile>db/liquibase_test.properties</liquibase.propertyFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>testcontainers</id>
+            <properties>
+                <test.excluded.groups>none</test.excluded.groups>
             </properties>
         </profile>
     </profiles>

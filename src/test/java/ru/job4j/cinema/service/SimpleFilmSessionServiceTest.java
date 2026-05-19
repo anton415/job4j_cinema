@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.job4j.cinema.model.Film;
@@ -21,9 +22,7 @@ import static org.mockito.Mockito.when;
 
 class SimpleFilmSessionServiceTest {
 
-    /**
-     * Сценарий: сервис собирает расписание с фильмом, жанром, залом, временем и ценой.
-     */
+    @DisplayName("сервис собирает расписание с фильмом, жанром, залом, временем и ценой.")
     @Test
     void whenFindAllThenReturnFilmSessionDtos() {
         var context = createContext();
@@ -41,9 +40,7 @@ class SimpleFilmSessionServiceTest {
         assertThat(sessions.get(0).getPrice()).isEqualTo(350);
     }
 
-    /**
-     * Сценарий: сервис формирует номера рядов и мест по размерам зала.
-     */
+    @DisplayName("сервис формирует номера рядов и мест по размерам зала.")
     @Test
     void whenFindRowsAndPlacesThenUseHallSize() {
         var context = createContext();

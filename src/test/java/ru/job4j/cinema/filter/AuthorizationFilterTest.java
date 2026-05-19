@@ -1,5 +1,6 @@
 package ru.job4j.cinema.filter;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpSession;
@@ -17,9 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class AuthorizationFilterTest {
 
-    /**
-     * Сценарий: публичная страница доступна гостю.
-     */
+    @DisplayName("публичная страница доступна гостю.")
     @Test
     void whenGuestRequestsPublicPageThenRequestPasses() throws Exception {
         var mockMvc = MockMvcBuilders.standaloneSetup(new TestController())
@@ -30,9 +29,7 @@ class AuthorizationFilterTest {
                 .andExpect(status().isOk());
     }
 
-    /**
-     * Сценарий: гость при покупке билета перенаправляется на /login.
-     */
+    @DisplayName("гость при покупке билета перенаправляется на /login.")
     @Test
     void whenGuestPostsTicketThenRedirectToLogin() throws Exception {
         var mockMvc = MockMvcBuilders.standaloneSetup(new TestController())
@@ -44,9 +41,7 @@ class AuthorizationFilterTest {
                 .andExpect(redirectedUrl("/login"));
     }
 
-    /**
-     * Сценарий: авторизованный пользователь проходит к защищенному действию.
-     */
+    @DisplayName("авторизованный пользователь проходит к защищенному действию.")
     @Test
     void whenAuthorizedUserRequestsProtectedPageThenRequestPasses() throws Exception {
         var session = new MockHttpSession();

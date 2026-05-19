@@ -2,6 +2,7 @@ package ru.job4j.cinema.controller;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -17,9 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FilmSessionControllerTest {
 
-    /**
-     * Сценарий: страница расписания получает список сеансов из сервиса.
-     */
+    @DisplayName("страница расписания получает список сеансов из сервиса.")
     @Test
     void whenGetSessionsThenReturnSessionsListView() throws Exception {
         var filmSessionService = mock(FilmSessionService.class);
