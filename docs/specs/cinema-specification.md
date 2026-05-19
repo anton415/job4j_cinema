@@ -21,7 +21,7 @@
 - Spring Boot 3.4.0.
 - Spring MVC, Thymeleaf.
 - Bootstrap, локальные CSS/JS файлы по аналогии с `job4j_dreamjob`.
-- PostgreSQL для production-профиля и интеграционных тестов.
+- PostgreSQL для production-профиля, H2 для интеграционных тестов.
 - Liquibase Maven plugin, SQL changelog в корневой директории `db`.
 - Sql2o 1.6.0.
 - Apache Commons DBCP2.
@@ -100,15 +100,14 @@ file.directory=files
 - `application-production.properties`:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://127.0.0.1:5432/cinema
-spring.datasource.username=postgres
-spring.datasource.password=password
-spring.datasource.driver-class-name=org.postgresql.Driver
+datasource.url=jdbc:postgresql://127.0.0.1:5432/cinema
+datasource.username=postgres
+datasource.password=password
+datasource.driver-class-name=org.postgresql.Driver
 ```
 
-- Обычный `mvn test` должен оставаться Docker-free.
-- Интеграционные тесты репозиториев должны использовать PostgreSQL Testcontainer, подключенный через Spring Boot
-  `@ServiceConnection`, и запускаться отдельным профилем `mvn -Ptestcontainers test`.
+- `application-test.properties` должен указывать настройки H2 БД в `target/test-db`.
+- Интеграционные тесты репозиториев должны быть Docker-free и запускаться на H2, как в `job4j_dreamjob`.
 
 ## Миграции и данные
 
@@ -245,7 +244,7 @@ DTO лежат в `ru.job4j.cinema.dto`. Они нужны для предста
 | `UserRepository` | `Sql2oUserRepository` | `Optional<User> save(User user)`, `Optional<User> findByEmailAndPassword(String email, String password)` |
 | `TicketRepository` | `Sql2oTicketRepository` | `Optional<Ticket> save(Ticket ticket)`, `Optional<Ticket> findById(int id)`, `List<Ticket> findBySessionId(int sessionId)` |
 
-`Sql2oUserRepository.save` и `Sql2oTicketRepository.save` должны ловить нарушение уникальности PostgreSQL `SQLState 23505`
+`Sql2oUserRepository.save` и `Sql2oTicketRepository.save` должны ловить нарушение уникальности `SQLState 23505`
 и возвращать `Optional.empty()`. Остальные ошибки пробрасываются выше.
 
 ## Сервисы
@@ -360,7 +359,7 @@ DTO лежат в `ru.job4j.cinema.dto`. Они нужны для предста
 
 Обязательные тесты:
 
-- repository integration tests на PostgreSQL с Liquibase:
+- repository integration tests на H2 с SQL-скриптами:
   - `Sql2oUserRepositoryTest`: успешная регистрация, дублирование email возвращает `Optional.empty()`;
   - `Sql2oTicketRepositoryTest`: успешная покупка, повторное место на том же сеансе возвращает `Optional.empty()`;
   - `Sql2oFilmRepositoryTest`, `Sql2oFilmSessionRepositoryTest`: чтение заполненных SQL-данных;

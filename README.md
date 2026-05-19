@@ -31,12 +31,6 @@ Web-приложение для кинотеатра. Гость может см
 CREATE DATABASE cinema;
 ```
 
-Создайте тестовую БД:
-
-```sql
-CREATE DATABASE cinema_test;
-```
-
 Примените миграции:
 
 ```bash
@@ -58,8 +52,11 @@ http://localhost:8080
 Для пересоздания тестовой схемы:
 
 ```bash
-mvn -Ptest liquibase:dropAll liquibase:update
+rm -rf target/test-db
+mvn -Ptest liquibase:update
 ```
+
+Тестовый профиль использует файловую H2 БД в `target/test-db`, отдельный PostgreSQL для тестов не нужен.
 
 ## Проверка
 
@@ -67,12 +64,6 @@ mvn -Ptest liquibase:dropAll liquibase:update
 mvn test
 mvn checkstyle:check
 mvn jacoco:report
-```
-
-Тесты репозиториев с PostgreSQL Testcontainer запускаются отдельно и требуют доступный Docker:
-
-```bash
-mvn -Ptestcontainers test
 ```
 
 ## Сценарии

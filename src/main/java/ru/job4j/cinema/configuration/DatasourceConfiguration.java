@@ -10,9 +10,7 @@ import org.sql2o.Sql2o;
 import org.sql2o.converters.Converter;
 import org.sql2o.converters.ConverterException;
 import org.sql2o.quirks.NoQuirks;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.jdbc.JdbcConnectionDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,20 +18,15 @@ import org.springframework.context.annotation.Configuration;
 public class DatasourceConfiguration {
 
     @Bean(destroyMethod = "close")
-    public BasicDataSource connectionPool(DataSourceProperties dataSourceProperties,
-                                          ObjectProvider<JdbcConnectionDetails> connectionDetailsProvider) {
-        var connectionDetails = connectionDetailsProvider.getIfAvailable();
+    public BasicDataSource connectionPool(@Value("${datasource.url}") String url,
+                                          @Value("${datasource.username}") String username,
+                                          @Value("${datasource.password}") String password,
+                                          @Value("${datasource.driver-class-name}") String driverClassName) {
         var dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(driverClassName(connectionDetails, dataSourceProperties));
-        dataSource.setUrl(connectionDetails == null
-                ? dataSourceProperties.determineUrl()
-                : connectionDetails.getJdbcUrl());
-        dataSource.setUsername(connectionDetails == null
-                ? dataSourceProperties.determineUsername()
-                : connectionDetails.getUsername());
-        dataSource.setPassword(connectionDetails == null
-                ? dataSourceProperties.determinePassword()
-                : connectionDetails.getPassword());
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
@@ -46,14 +39,6 @@ public class DatasourceConfiguration {
         var converters = new HashMap<Class, Converter>();
         converters.put(LocalDateTime.class, localDateTimeConverter());
         return converters;
-    }
-
-    private String driverClassName(JdbcConnectionDetails connectionDetails,
-                                   DataSourceProperties dataSourceProperties) {
-        if (connectionDetails == null || connectionDetails.getDriverClassName() == null) {
-            return dataSourceProperties.determineDriverClassName();
-        }
-        return connectionDetails.getDriverClassName();
     }
 
     private Converter<LocalDateTime> localDateTimeConverter() {

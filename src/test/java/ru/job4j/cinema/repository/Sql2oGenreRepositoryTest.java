@@ -1,26 +1,23 @@
 package ru.job4j.cinema.repository;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@ActiveProfiles("test")
-@Tag("testcontainers")
-@Testcontainers
-@Import(PostgresContainerConfiguration.class)
 class Sql2oGenreRepositoryTest {
-    @Autowired
     private GenreRepository genreRepository;
 
-    @DisplayName("репозиторий читает жанры, загруженные Liquibase DML-скриптами.")
+    @BeforeEach
+    void setUp() throws SQLException, IOException {
+        genreRepository = new Sql2oGenreRepository(Sql2oTestHelper.initSql2o());
+    }
+
+    @DisplayName("репозиторий читает жанры, загруженные SQL DML-скриптами.")
     @Test
     void whenFindAllThenReturnSeededGenres() {
         var genres = genreRepository.findAll();

@@ -1,26 +1,23 @@
 package ru.job4j.cinema.repository;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@ActiveProfiles("test")
-@Tag("testcontainers")
-@Testcontainers
-@Import(PostgresContainerConfiguration.class)
 class Sql2oFileRepositoryTest {
-    @Autowired
     private FileRepository fileRepository;
 
-    @DisplayName("файл находится по id с данными из Liquibase DML-скрипта.")
+    @BeforeEach
+    void setUp() throws SQLException, IOException {
+        fileRepository = new Sql2oFileRepository(Sql2oTestHelper.initSql2o());
+    }
+
+    @DisplayName("файл находится по id с данными из SQL DML-скрипта.")
     @Test
     void whenFindByIdThenReturnSeededFile() {
         var file = fileRepository.findById(1);

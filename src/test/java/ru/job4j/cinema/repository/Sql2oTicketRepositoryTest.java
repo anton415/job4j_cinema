@@ -1,38 +1,27 @@
 package ru.job4j.cinema.repository;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@ActiveProfiles("test")
-@Tag("testcontainers")
-@Testcontainers
-@Import(PostgresContainerConfiguration.class)
 class Sql2oTicketRepositoryTest {
-    @Autowired
     private TicketRepository ticketRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private Sql2oTestHelper sql2oTestHelper;
-
     @BeforeEach
-    void setUp() {
-        sql2oTestHelper.clearMutableTables();
+    void setUp() throws SQLException, IOException {
+        var sql2o = Sql2oTestHelper.initSql2o();
+        ticketRepository = new Sql2oTicketRepository(sql2o);
+        userRepository = new Sql2oUserRepository(sql2o);
     }
 
     @DisplayName("билет сохраняется, находится по id и входит в список билетов сеанса.")
