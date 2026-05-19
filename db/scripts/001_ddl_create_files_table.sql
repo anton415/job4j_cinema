@@ -4,3 +4,6 @@ CREATE TABLE files
     name VARCHAR NOT NULL,
     path VARCHAR NOT NULL UNIQUE
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS files;

@@ -6,3 +6,6 @@ CREATE TABLE halls
     place_count INT NOT NULL,
     description VARCHAR NOT NULL
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS halls;

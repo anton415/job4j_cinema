@@ -7,3 +7,6 @@ CREATE TABLE film_sessions
     end_time TIMESTAMP NOT NULL,
     price INT NOT NULL
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS film_sessions;

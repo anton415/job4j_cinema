@@ -7,3 +7,6 @@ CREATE TABLE tickets
     user_id INT NOT NULL,
     UNIQUE (session_id, row_number, place_number)
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS tickets;
