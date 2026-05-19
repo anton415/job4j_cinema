@@ -1,4 +1,4 @@
-package ru.job4j.cinema.repository;
+package ru.job4j.cinema.repository.ticket;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import org.sql2o.Sql2oException;
 import org.springframework.stereotype.Repository;
 
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.repository.common.Sql2oExceptionHelper;
 
 @ThreadSafe
 @Repository

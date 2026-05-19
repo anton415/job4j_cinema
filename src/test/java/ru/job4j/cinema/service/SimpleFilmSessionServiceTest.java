@@ -11,10 +11,11 @@ import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.model.Hall;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.FilmSessionRepository;
-import ru.job4j.cinema.repository.GenreRepository;
-import ru.job4j.cinema.repository.HallRepository;
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.filmsession.FilmSessionRepository;
+import ru.job4j.cinema.repository.genre.GenreRepository;
+import ru.job4j.cinema.repository.hall.HallRepository;
+import ru.job4j.cinema.service.filmsession.SimpleFilmSessionService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

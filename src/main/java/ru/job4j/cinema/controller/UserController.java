@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.job4j.cinema.filter.SessionUser;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.UserService;
+import ru.job4j.cinema.service.user.UserService;
 
 @ThreadSafe
 @Controller

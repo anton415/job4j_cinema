@@ -14,9 +14,9 @@ import ru.job4j.cinema.dto.TicketDto;
 import ru.job4j.cinema.filter.SessionUser;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.FilmService;
-import ru.job4j.cinema.service.FilmSessionService;
-import ru.job4j.cinema.service.TicketService;
+import ru.job4j.cinema.service.film.FilmService;
+import ru.job4j.cinema.service.filmsession.FilmSessionService;
+import ru.job4j.cinema.service.ticket.TicketService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

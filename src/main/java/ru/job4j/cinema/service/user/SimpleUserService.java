@@ -1,4 +1,4 @@
-package ru.job4j.cinema.service;
+package ru.job4j.cinema.service.user;
 
 import java.util.Optional;
 
@@ -7,7 +7,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.repository.UserRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
 
 @ThreadSafe
 @Service

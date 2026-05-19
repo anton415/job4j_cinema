@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.film.Sql2oFilmRepository;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Sql2oFilmRepositoryTest {

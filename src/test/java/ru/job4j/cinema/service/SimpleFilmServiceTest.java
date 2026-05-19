@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.GenreRepository;
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.genre.GenreRepository;
+import ru.job4j.cinema.service.film.SimpleFilmService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

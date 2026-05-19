@@ -1,14 +1,14 @@
-package ru.job4j.cinema.repository;
+package ru.job4j.cinema.repository.common;
 
 import java.sql.SQLException;
 
-final class Sql2oExceptionHelper {
+public final class Sql2oExceptionHelper {
     private static final String UNIQUE_VIOLATION = "23505";
 
     private Sql2oExceptionHelper() {
     }
 
-    static boolean isUniqueViolation(Throwable throwable) {
+    public static boolean isUniqueViolation(Throwable throwable) {
         var current = throwable;
         while (current != null) {
             if (current instanceof SQLException sqlException

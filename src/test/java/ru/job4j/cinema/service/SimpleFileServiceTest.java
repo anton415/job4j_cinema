@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import ru.job4j.cinema.model.File;
-import ru.job4j.cinema.repository.FileRepository;
+import ru.job4j.cinema.repository.file.FileRepository;
+import ru.job4j.cinema.service.file.SimpleFileService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

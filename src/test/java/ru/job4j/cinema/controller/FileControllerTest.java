@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ru.job4j.cinema.dto.FileDto;
-import ru.job4j.cinema.service.FileService;
+import ru.job4j.cinema.service.file.FileService;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

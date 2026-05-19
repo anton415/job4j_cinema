@@ -1,4 +1,4 @@
-package ru.job4j.cinema.service;
+package ru.job4j.cinema.service.film;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.GenreRepository;
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.genre.GenreRepository;
 
 @ThreadSafe
 @Service

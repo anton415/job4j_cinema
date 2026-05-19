@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ru.job4j.cinema.repository.file.FileRepository;
+import ru.job4j.cinema.repository.file.Sql2oFileRepository;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Sql2oFileRepositoryTest {

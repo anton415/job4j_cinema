@@ -1,4 +1,4 @@
-package ru.job4j.cinema.service;
+package ru.job4j.cinema.service.ticket;
 
 import java.util.Optional;
 
@@ -10,11 +10,11 @@ import ru.job4j.cinema.dto.TicketDto;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.FilmSessionRepository;
-import ru.job4j.cinema.repository.HallRepository;
-import ru.job4j.cinema.repository.TicketRepository;
-import ru.job4j.cinema.repository.UserRepository;
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.filmsession.FilmSessionRepository;
+import ru.job4j.cinema.repository.hall.HallRepository;
+import ru.job4j.cinema.repository.ticket.TicketRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
 
 @ThreadSafe
 @Service

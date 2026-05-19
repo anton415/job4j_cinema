@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ru.job4j.cinema.repository.genre.GenreRepository;
+import ru.job4j.cinema.repository.genre.Sql2oGenreRepository;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Sql2oGenreRepositoryTest {

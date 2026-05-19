@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ru.job4j.cinema.dto.FilmSessionDto;
-import ru.job4j.cinema.service.FilmSessionService;
+import ru.job4j.cinema.service.filmsession.FilmSessionService;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

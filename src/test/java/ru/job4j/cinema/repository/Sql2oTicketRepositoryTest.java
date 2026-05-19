@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
+import ru.job4j.cinema.repository.ticket.Sql2oTicketRepository;
+import ru.job4j.cinema.repository.ticket.TicketRepository;
+import ru.job4j.cinema.repository.user.Sql2oUserRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
