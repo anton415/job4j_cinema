@@ -9,3 +9,6 @@ CREATE TABLE films
     duration_in_minutes INT NOT NULL,
     file_id INT REFERENCES files (id) NOT NULL
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS films;

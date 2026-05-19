@@ -2,10 +2,12 @@ package ru.job4j.cinema.service;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.repository.UserRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
+import ru.job4j.cinema.service.user.SimpleUserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -13,9 +15,7 @@ import static org.mockito.Mockito.when;
 
 class SimpleUserServiceTest {
 
-    /**
-     * Сценарий: регистрация делегируется репозиторию пользователей.
-     */
+    @DisplayName("регистрация делегируется репозиторию пользователей.")
     @Test
     void whenRegisterThenReturnSavedUser() {
         var userRepository = mock(UserRepository.class);
@@ -28,9 +28,7 @@ class SimpleUserServiceTest {
         assertThat(saved).contains(user);
     }
 
-    /**
-     * Сценарий: вход ищет пользователя по email и password.
-     */
+    @DisplayName("вход ищет пользователя по email и password.")
     @Test
     void whenLoginThenReturnUser() {
         var userRepository = mock(UserRepository.class);

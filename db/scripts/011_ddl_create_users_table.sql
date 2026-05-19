@@ -5,3 +5,6 @@ CREATE TABLE users
     email VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL
 );
+
+-- Rollback:
+-- DROP TABLE IF EXISTS users;

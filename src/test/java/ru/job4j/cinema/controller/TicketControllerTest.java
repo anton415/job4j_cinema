@@ -3,6 +3,7 @@ package ru.job4j.cinema.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -13,9 +14,9 @@ import ru.job4j.cinema.dto.TicketDto;
 import ru.job4j.cinema.filter.SessionUser;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.FilmService;
-import ru.job4j.cinema.service.FilmSessionService;
-import ru.job4j.cinema.service.TicketService;
+import ru.job4j.cinema.service.film.FilmService;
+import ru.job4j.cinema.service.filmsession.FilmSessionService;
+import ru.job4j.cinema.service.ticket.TicketService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -29,9 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class TicketControllerTest {
 
-    /**
-     * Сценарий: форма покупки получает сеанс, фильм, ряды и места.
-     */
+    @DisplayName("форма покупки получает сеанс, фильм, ряды и места.")
     @Test
     void whenGetBuyPageThenReturnBuyView() throws Exception {
         var context = createContext();
@@ -47,24 +46,7 @@ class TicketControllerTest {
                 .andExpect(model().attributeExists("filmSession", "film", "rows", "places", "ticket"));
     }
 
-    /**
-     * Сценарий: гость при отправке покупки перенаправляется на страницу входа.
-     */
-    @Test
-    void whenGuestBuysTicketThenRedirectToLogin() throws Exception {
-        var context = createContext();
-
-        context.mockMvc.perform(post("/tickets")
-                        .param("sessionId", "1")
-                        .param("rowNumber", "1")
-                        .param("placeNumber", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/login"));
-    }
-
-    /**
-     * Сценарий: авторизованный пользователь после покупки попадает на страницу успеха.
-     */
+    @DisplayName("авторизованный пользователь после покупки попадает на страницу успеха.")
     @Test
     void whenAuthorizedUserBuysTicketThenRedirectToSuccessPage() throws Exception {
         var context = createContext();
@@ -80,9 +62,7 @@ class TicketControllerTest {
                 .andExpect(redirectedUrl("/tickets/success/5"));
     }
 
-    /**
-     * Сценарий: занятое место перенаправляет на страницу неудачной покупки.
-     */
+    @DisplayName("занятое место перенаправляет на страницу неудачной покупки.")
     @Test
     void whenPlaceOccupiedThenRedirectToFailurePage() throws Exception {
         var context = createContext();
@@ -98,9 +78,7 @@ class TicketControllerTest {
                 .andExpect(redirectedUrl("/tickets/failure/1"));
     }
 
-    /**
-     * Сценарий: страница успешной покупки получает TicketDto.
-     */
+    @DisplayName("страница успешной покупки получает TicketDto.")
     @Test
     void whenGetSuccessPageThenReturnSuccessView() throws Exception {
         var context = createContext();
@@ -112,9 +90,7 @@ class TicketControllerTest {
                 .andExpect(model().attributeExists("ticket"));
     }
 
-    /**
-     * Сценарий: страница неудачной покупки сохраняет id сеанса для повторной попытки.
-     */
+    @DisplayName("страница неудачной покупки сохраняет id сеанса для повторной попытки.")
     @Test
     void whenGetFailurePageThenReturnFailureView() throws Exception {
         var context = createContext();

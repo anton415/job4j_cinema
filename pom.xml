@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <activeProfile>production</activeProfile>
         <liquibase.propertyFile>db/liquibase.properties</liquibase.propertyFile>
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
     </properties>
 
     <dependencies>
@@ -59,8 +60,18 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -70,6 +81,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
@@ -84,6 +108,16 @@
                         <groupId>org.postgresql</groupId>
                         <artifactId>postgresql</artifactId>
                         <version>42.7.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>2.3.232</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                        <version>3.17.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -118,7 +152,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.14</version>
                 <executions>
                     <execution>
                         <goals>

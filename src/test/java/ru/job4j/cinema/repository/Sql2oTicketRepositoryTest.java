@@ -1,36 +1,34 @@
 package ru.job4j.cinema.repository;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
+import ru.job4j.cinema.repository.ticket.Sql2oTicketRepository;
+import ru.job4j.cinema.repository.ticket.TicketRepository;
+import ru.job4j.cinema.repository.user.Sql2oUserRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@ActiveProfiles("test")
 class Sql2oTicketRepositoryTest {
-    @Autowired
     private TicketRepository ticketRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private Sql2oTestHelper sql2oTestHelper;
-
     @BeforeEach
-    void setUp() {
-        sql2oTestHelper.clearMutableTables();
+    void setUp() throws SQLException, IOException {
+        var sql2o = Sql2oTestHelper.initSql2o();
+        ticketRepository = new Sql2oTicketRepository(sql2o);
+        userRepository = new Sql2oUserRepository(sql2o);
     }
 
-    /**
-     * Сценарий: билет сохраняется, находится по id и входит в список билетов сеанса.
-     */
+    @DisplayName("билет сохраняется, находится по id и входит в список билетов сеанса.")
     @Test
     void whenSaveTicketThenCanFindByIdAndSessionId() {
         var user = userRepository.save(new User("Иван Иванов", "ivan@example.com", "password")).get();
@@ -46,9 +44,7 @@ class Sql2oTicketRepositoryTest {
         assertThat(sessionTickets).containsExactly(saved.get());
     }
 
-    /**
-     * Сценарий: повторная покупка того же места на том же сеансе возвращает Optional.empty().
-     */
+    @DisplayName("повторная покупка того же места на том же сеансе возвращает Optional.empty().")
     @Test
     void whenSaveTicketWithSameSessionRowAndPlaceThenReturnEmptyOptional() {
         var user = userRepository.save(new User("Иван Иванов", "ivan@example.com", "password")).get();

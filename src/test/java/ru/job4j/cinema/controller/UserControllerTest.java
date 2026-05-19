@@ -2,13 +2,14 @@ package ru.job4j.cinema.controller;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ru.job4j.cinema.filter.SessionUser;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.service.UserService;
+import ru.job4j.cinema.service.user.UserService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -23,9 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class UserControllerTest {
 
-    /**
-     * Сценарий: страница регистрации возвращает форму.
-     */
+    @DisplayName("страница регистрации возвращает форму.")
     @Test
     void whenGetRegisterPageThenReturnRegisterView() throws Exception {
         var userService = mock(UserService.class);
@@ -39,9 +38,7 @@ class UserControllerTest {
                 .andExpect(model().attributeExists("userToRegister"));
     }
 
-    /**
-     * Сценарий: успешная регистрация сохраняет пользователя в session и ведет на главную.
-     */
+    @DisplayName("успешная регистрация сохраняет пользователя в session и ведет на главную.")
     @Test
     void whenRegisterThenRedirectToRootAndStoreUserInSession() throws Exception {
         var userService = mock(UserService.class);
@@ -60,9 +57,7 @@ class UserControllerTest {
                 .andExpect(request().sessionAttribute(SessionUser.ATTRIBUTE, user));
     }
 
-    /**
-     * Сценарий: при дублировании email пользователь остается на форме регистрации.
-     */
+    @DisplayName("при дублировании email пользователь остается на форме регистрации.")
     @Test
     void whenRegisterDuplicateEmailThenReturnRegisterViewWithMessage() throws Exception {
         var userService = mock(UserService.class);
@@ -80,9 +75,7 @@ class UserControllerTest {
                 .andExpect(model().attributeExists("message"));
     }
 
-    /**
-     * Сценарий: успешный вход сохраняет пользователя в session и ведет на главную.
-     */
+    @DisplayName("успешный вход сохраняет пользователя в session и ведет на главную.")
     @Test
     void whenLoginThenRedirectToRootAndStoreUserInSession() throws Exception {
         var userService = mock(UserService.class);
@@ -100,9 +93,7 @@ class UserControllerTest {
                 .andExpect(request().sessionAttribute(SessionUser.ATTRIBUTE, user));
     }
 
-    /**
-     * Сценарий: выход инвалидирует session и ведет на главную.
-     */
+    @DisplayName("выход инвалидирует session и ведет на главную.")
     @Test
     void whenLogoutThenRedirectToRoot() throws Exception {
         var userService = mock(UserService.class);

@@ -21,7 +21,7 @@
 - Spring Boot 3.4.0.
 - Spring MVC, Thymeleaf.
 - Bootstrap, локальные CSS/JS файлы по аналогии с `job4j_dreamjob`.
-- PostgreSQL для production-профиля и интеграционных тестов.
+- PostgreSQL для production-профиля, H2 для интеграционных тестов.
 - Liquibase Maven plugin, SQL changelog в корневой директории `db`.
 - Sql2o 1.6.0.
 - Apache Commons DBCP2.
@@ -106,9 +106,8 @@ datasource.password=password
 datasource.driver-class-name=org.postgresql.Driver
 ```
 
-- `application-test.properties` должен указывать настройки отдельной тестовой PostgreSQL БД, например `cinema_test`.
-- `db/liquibase_test.properties` должен использовать ту же тестовую PostgreSQL БД, чтобы интеграционные тесты проверяли
-  SQL на реальном диалекте PostgreSQL.
+- `application-test.properties` должен указывать настройки H2 БД в `target/test-db`.
+- Интеграционные тесты репозиториев должны быть Docker-free и запускаться на H2, как в `job4j_dreamjob`.
 
 ## Миграции и данные
 
@@ -245,7 +244,7 @@ DTO лежат в `ru.job4j.cinema.dto`. Они нужны для предста
 | `UserRepository` | `Sql2oUserRepository` | `Optional<User> save(User user)`, `Optional<User> findByEmailAndPassword(String email, String password)` |
 | `TicketRepository` | `Sql2oTicketRepository` | `Optional<Ticket> save(Ticket ticket)`, `Optional<Ticket> findById(int id)`, `List<Ticket> findBySessionId(int sessionId)` |
 
-`Sql2oUserRepository.save` и `Sql2oTicketRepository.save` должны ловить нарушение уникальности PostgreSQL `SQLState 23505`
+`Sql2oUserRepository.save` и `Sql2oTicketRepository.save` должны ловить нарушение уникальности `SQLState 23505`
 и возвращать `Optional.empty()`. Остальные ошибки пробрасываются выше.
 
 ## Сервисы
@@ -360,7 +359,7 @@ DTO лежат в `ru.job4j.cinema.dto`. Они нужны для предста
 
 Обязательные тесты:
 
-- repository integration tests на PostgreSQL с Liquibase:
+- repository integration tests на H2 с SQL-скриптами:
   - `Sql2oUserRepositoryTest`: успешная регистрация, дублирование email возвращает `Optional.empty()`;
   - `Sql2oTicketRepositoryTest`: успешная покупка, повторное место на том же сеансе возвращает `Optional.empty()`;
   - `Sql2oFilmRepositoryTest`, `Sql2oFilmSessionRepositoryTest`: чтение заполненных SQL-данных;

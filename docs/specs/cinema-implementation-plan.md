@@ -5,7 +5,7 @@
 
 ## Общие правила
 
-- Не использовать H2. Интеграционные тесты репозиториев выполнять на отдельной PostgreSQL БД `cinema_test`.
+- Интеграционные тесты репозиториев выполнять на H2 через `Sql2oTestHelper`, как в `job4j_dreamjob`, без Docker и отдельной PostgreSQL БД.
 - Каждый слой закрывать тестами до перехода к следующему слою.
 - Не переносить бизнес-логику в контроллеры: контроллеры только принимают запросы, вызывают сервисы и выбирают view.
 - DTO для представлений собирать в сервисах.
@@ -69,17 +69,11 @@ mvn checkstyle:check
 CREATE DATABASE cinema;
 ```
 
-- [x] Создать тестовую БД:
-
-```sql
-CREATE DATABASE cinema_test;
-```
-
 - [x] Добавить `src/main/resources/application.properties`.
 - [x] Добавить `src/main/resources/application-production.properties` для БД `cinema`.
-- [x] Добавить `src/main/resources/application-test.properties` для БД `cinema_test`.
+- [x] Добавить `src/main/resources/application-test.properties` для H2 БД.
 - [x] Добавить `db/liquibase.properties` для БД `cinema`.
-- [x] Добавить `db/liquibase_test.properties` для БД `cinema_test`.
+- [x] Добавить `db/liquibase_test.properties` для H2 БД.
 - [x] Создать `DatasourceConfiguration`:
   - `BasicDataSource`;
   - `Sql2o`;
@@ -105,7 +99,8 @@ mvn -Ptest liquibase:update
 При необходимости пересоздать тестовую схему:
 
 ```bash
-mvn -Ptest liquibase:dropAll liquibase:update
+rm -rf target/test-db
+mvn -Ptest liquibase:update
 ```
 
 ### Коммит
@@ -178,9 +173,9 @@ mvn checkstyle:check
 - [x] В `Sql2oUserRepository.save` обрабатывать уникальность `email` через `Optional.empty()`.
 - [x] В `Sql2oTicketRepository.save` обрабатывать уникальность `(session_id, row_number, place_number)` через
   `Optional.empty()`.
-- [x] Для PostgreSQL проверять `SQLState 23505`.
+- [x] Для нарушения уникальности проверять `SQLState 23505`.
 - [x] Создать `Sql2oTestHelper` для очистки таблиц в правильном порядке перед тестами.
-- [x] Написать интеграционные тесты на PostgreSQL:
+- [x] Написать интеграционные тесты на H2:
   - `Sql2oUserRepositoryTest`;
   - `Sql2oTicketRepositoryTest`;
   - `Sql2oFilmRepositoryTest`;
@@ -190,7 +185,7 @@ mvn checkstyle:check
 ### Проверка
 
 ```bash
-mvn -Ptest test -Dtest=*RepositoryTest
+mvn test -Dtest=*RepositoryTest
 ```
 
 ### Коммит
@@ -384,7 +379,7 @@ mvn jacoco:report
 ## Финальная проверка
 
 - [x] Production БД `cinema` создается и мигрируется через Liquibase.
-- [x] Тестовая БД `cinema_test` создается и мигрируется через Liquibase.
+- [x] Тестовая H2 БД создается из SQL-скриптов в репозиторных тестах и может мигрироваться через Liquibase Maven plugin.
 - [x] `mvn test` проходит.
 - [x] `mvn checkstyle:check` проходит.
 - [x] `mvn jacoco:report` показывает покрытие не ниже 50%.

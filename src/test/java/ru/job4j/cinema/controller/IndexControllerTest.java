@@ -1,5 +1,6 @@
 package ru.job4j.cinema.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -9,9 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class IndexControllerTest {
 
-    /**
-     * Сценарий: главная страница доступна по корневому URL.
-     */
+    @DisplayName("главная страница доступна по корневому URL.")
     @Test
     void whenGetRootThenReturnIndexView() throws Exception {
         var mockMvc = MockMvcBuilders.standaloneSetup(new IndexController())
@@ -23,9 +22,7 @@ class IndexControllerTest {
                 .andExpect(view().name("index"));
     }
 
-    /**
-     * Сценарий: главная страница доступна по /index.
-     */
+    @DisplayName("главная страница доступна по /index.")
     @Test
     void whenGetIndexThenReturnIndexView() throws Exception {
         var mockMvc = MockMvcBuilders.standaloneSetup(new IndexController())

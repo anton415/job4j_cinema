@@ -2,11 +2,12 @@ package ru.job4j.cinema.controller;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ru.job4j.cinema.dto.FilmDto;
-import ru.job4j.cinema.service.FilmService;
+import ru.job4j.cinema.service.film.FilmService;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -17,9 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FilmControllerTest {
 
-    /**
-     * Сценарий: страница кинотеки получает список фильмов из сервиса.
-     */
+    @DisplayName("страница кинотеки получает список фильмов из сервиса.")
     @Test
     void whenGetFilmsThenReturnFilmsListView() throws Exception {
         var filmService = mock(FilmService.class);

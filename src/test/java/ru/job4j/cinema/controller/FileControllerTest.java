@@ -2,11 +2,12 @@ package ru.job4j.cinema.controller;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ru.job4j.cinema.dto.FileDto;
-import ru.job4j.cinema.service.FileService;
+import ru.job4j.cinema.service.file.FileService;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -16,9 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FileControllerTest {
 
-    /**
-     * Сценарий: постер отдается байтами через /files/{id}.
-     */
+    @DisplayName("постер отдается байтами через /files/{id}.")
     @Test
     void whenGetExistingFileThenReturnBytes() throws Exception {
         var fileService = mock(FileService.class);
@@ -32,9 +31,7 @@ class FileControllerTest {
                 .andExpect(content().bytes("<svg></svg>".getBytes()));
     }
 
-    /**
-     * Сценарий: если файл не найден, контроллер возвращает 404.
-     */
+    @DisplayName("если файл не найден, контроллер возвращает 404.")
     @Test
     void whenGetAbsentFileThenReturnNotFound() throws Exception {
         var fileService = mock(FileService.class);

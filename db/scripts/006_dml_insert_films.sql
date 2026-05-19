@@ -23,3 +23,6 @@ VALUES (1,
         12,
         148,
         3);
+
+-- Rollback:
+-- DELETE FROM films WHERE id IN (1, 2, 3);

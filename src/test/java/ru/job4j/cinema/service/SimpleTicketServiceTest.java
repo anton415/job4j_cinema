@@ -3,18 +3,22 @@ package ru.job4j.cinema.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 
+import ru.job4j.cinema.mapper.TicketMapper;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.FilmSessionRepository;
-import ru.job4j.cinema.repository.HallRepository;
-import ru.job4j.cinema.repository.TicketRepository;
-import ru.job4j.cinema.repository.UserRepository;
+import ru.job4j.cinema.repository.film.FilmRepository;
+import ru.job4j.cinema.repository.filmsession.FilmSessionRepository;
+import ru.job4j.cinema.repository.hall.HallRepository;
+import ru.job4j.cinema.repository.ticket.TicketRepository;
+import ru.job4j.cinema.repository.user.UserRepository;
+import ru.job4j.cinema.service.ticket.SimpleTicketService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -23,9 +27,7 @@ import static org.mockito.Mockito.when;
 
 class SimpleTicketServiceTest {
 
-    /**
-     * Сценарий: покупка проходит, когда сеанс, зал, пользователь и место корректны.
-     */
+    @DisplayName("покупка проходит, когда сеанс, зал, пользователь и место корректны.")
     @Test
     void whenBuyValidTicketThenReturnSavedTicket() {
         var context = createContext();
@@ -39,9 +41,7 @@ class SimpleTicketServiceTest {
         assertThat(result).contains(savedTicket);
     }
 
-    /**
-     * Сценарий: если место уже занято, сервис возвращает Optional.empty().
-     */
+    @DisplayName("если место уже занято, сервис возвращает Optional.empty().")
     @Test
     void whenBuyOccupiedPlaceThenReturnEmptyOptional() {
         var context = createContext();
@@ -54,9 +54,7 @@ class SimpleTicketServiceTest {
         assertThat(result).isEmpty();
     }
 
-    /**
-     * Сценарий: если сеанс не существует, сервис не пытается сохранить билет.
-     */
+    @DisplayName("если сеанс не существует, сервис не пытается сохранить билет.")
     @Test
     void whenBuyTicketForAbsentSessionThenReturnEmptyOptional() {
         var context = createContext();
@@ -69,9 +67,7 @@ class SimpleTicketServiceTest {
         verifyNoInteractions(context.hallRepository, context.userRepository, context.ticketRepository);
     }
 
-    /**
-     * Сценарий: сервис собирает TicketDto для страницы успешной покупки.
-     */
+    @DisplayName("сервис собирает TicketDto для страницы успешной покупки.")
     @Test
     void whenFindByIdThenReturnTicketDto() {
         var context = createContext();
@@ -97,8 +93,9 @@ class SimpleTicketServiceTest {
         var filmRepository = mock(FilmRepository.class);
         var hallRepository = mock(HallRepository.class);
         var userRepository = mock(UserRepository.class);
+        var ticketMapper = Mappers.getMapper(TicketMapper.class);
         var service = new SimpleTicketService(ticketRepository, filmSessionRepository,
-                filmRepository, hallRepository, userRepository);
+                filmRepository, hallRepository, userRepository, ticketMapper);
         return new TestContext(service, ticketRepository, filmSessionRepository,
                 filmRepository, hallRepository, userRepository);
     }
