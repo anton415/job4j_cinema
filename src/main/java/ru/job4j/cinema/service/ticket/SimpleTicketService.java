@@ -7,6 +7,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 
 import ru.job4j.cinema.dto.TicketDto;
+import ru.job4j.cinema.mapper.TicketMapper;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
@@ -24,17 +25,20 @@ public class SimpleTicketService implements TicketService {
     private final FilmRepository filmRepository;
     private final HallRepository hallRepository;
     private final UserRepository userRepository;
+    private final TicketMapper ticketMapper;
 
     public SimpleTicketService(TicketRepository ticketRepository,
                                FilmSessionRepository filmSessionRepository,
                                FilmRepository filmRepository,
                                HallRepository hallRepository,
-                               UserRepository userRepository) {
+                               UserRepository userRepository,
+                               TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
         this.filmSessionRepository = filmSessionRepository;
         this.filmRepository = filmRepository;
         this.hallRepository = hallRepository;
         this.userRepository = userRepository;
+        this.ticketMapper = ticketMapper;
     }
 
     @Override
@@ -73,17 +77,8 @@ public class SimpleTicketService implements TicketService {
         if (filmOptional.isEmpty() || hallOptional.isEmpty() || userOptional.isEmpty()) {
             return Optional.empty();
         }
-        var dto = new TicketDto();
-        dto.setId(ticket.getId());
-        dto.setSessionId(session.getId());
-        dto.setFilmName(filmOptional.get().getName());
-        dto.setHallName(hallOptional.get().getName());
-        dto.setStartTime(session.getStartTime());
-        dto.setRowNumber(ticket.getRowNumber());
-        dto.setPlaceNumber(ticket.getPlaceNumber());
-        dto.setPrice(session.getPrice());
-        dto.setUserFullName(userOptional.get().getFullName());
-        return Optional.of(dto);
+        return Optional.of(ticketMapper.toDto(ticket, session, filmOptional.get(),
+                hallOptional.get(), userOptional.get()));
     }
 
     private boolean isPlaceInHall(Ticket ticket, Hall hall) {

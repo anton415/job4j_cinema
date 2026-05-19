@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 
+import ru.job4j.cinema.mapper.TicketMapper;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
@@ -91,8 +93,9 @@ class SimpleTicketServiceTest {
         var filmRepository = mock(FilmRepository.class);
         var hallRepository = mock(HallRepository.class);
         var userRepository = mock(UserRepository.class);
+        var ticketMapper = Mappers.getMapper(TicketMapper.class);
         var service = new SimpleTicketService(ticketRepository, filmSessionRepository,
-                filmRepository, hallRepository, userRepository);
+                filmRepository, hallRepository, userRepository, ticketMapper);
         return new TestContext(service, ticketRepository, filmSessionRepository,
                 filmRepository, hallRepository, userRepository);
     }
